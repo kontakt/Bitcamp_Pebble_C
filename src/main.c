@@ -143,7 +143,7 @@ static void detail_window_load(Window *window) {
   stock_name = text_layer_create(GRect(0, 0, bounds.size.w, 20));
   text_layer_set_background_color(stock_name, GColorBlack);
   text_layer_set_text_color(stock_name, GColorWhite);
-  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
+  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_24_BOLD));
   text_layer_set_text(stock_name, stocks[current_focus].handle);
   text_layer_set_text_alignment(stock_name, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
