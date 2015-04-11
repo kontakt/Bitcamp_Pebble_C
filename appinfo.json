@@ -1,0 +1,47 @@
+{
+    "appKeys": {},
+    "capabilities": [
+        ""
+    ],
+    "companyName": "chuffine@gmail.com",
+    "longName": "C Demo",
+    "projectType": "native",
+    "resources": {
+        "media": [
+            {
+                "file": "images/fire.png",
+                "name": "HOT",
+                "type": "png"
+            },
+            {
+                "file": "images/NEUTRAL.png",
+                "name": "NEUTRAL",
+                "type": "png"
+            },
+            {
+                "file": "images/UP.png",
+                "name": "UP",
+                "type": "png"
+            },
+            {
+                "file": "images/DOWN.png",
+                "name": "DOWN",
+                "type": "png"
+            },
+            {
+                "file": "images/stocks.png",
+                "menuIcon": true,
+                "name": "icon",
+                "type": "png"
+            }
+        ]
+    },
+    "sdkVersion": "2",
+    "shortName": "Stocks",
+    "uuid": "32ce2e46-72ae-4505-8b7a-66f4361ae642",
+    "versionCode": 1,
+    "versionLabel": "0.0",
+    "watchapp": {
+        "watchface": false
+    }
+}
