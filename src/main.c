@@ -17,7 +17,7 @@ static MenuLayer *main_menu;     // Menu for main window
 //// FOCUS WINDOW ////
 static Window *window_detail;    // Detail window handle
 static TextLayer *stock_name;    // Stock name text layer
-static BitmapLayer *chart        // Chart for the stock
+static BitmapLayer *chart;       // Chart for the stock
 static TextLayer *q1;            // Top Left text layer
 static TextLayer *q2;            // Top Right text layer
 static TextLayer *q3;            // Bottom Left text layer
