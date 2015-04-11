@@ -58,6 +58,8 @@ void generate(){
   stock_count++;
   stocks[stock_count] = new_stock("STOP", "$12.35", 1);
   stock_count++;
+  stocks[stock_count] = new_stock("JUNK", "$0.12", 3);
+  stock_count++;
 }
 
 // Only one section
