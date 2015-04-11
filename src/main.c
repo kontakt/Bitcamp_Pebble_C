@@ -19,9 +19,9 @@ static MenuLayer *main_menu;     // Menu for main window
 static Window *window_detail;    // Detail window handle
 static TextLayer *stock_name;    // Stock name text layer
 static BitmapLayer *chart;       // Chart for the stock
-static TextLayer *l1;            // Top Row
-static TextLayer *l2;            // Middle Row
-static TextLayer *l3;            // Bottom Row
+static TextLayer *line_1;        // Top Row
+static TextLayer *line_2;        // Middle Row
+static TextLayer *line_3;        // Bottom Row
 
 //// Prototypes ////
 static void detail_window_unload(Window *window);
