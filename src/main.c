@@ -7,6 +7,7 @@ struct stock {
   GBitmap  *graph;
 };
 
+int current_focus = 0;
 int stock_count = 0;
 struct stock stocks [10];
 
@@ -92,6 +93,8 @@ static void menu_draw_row_callback(GContext* ctx, const Layer *cell_layer, MenuI
 
 // Click handler
 static void menu_select_callback(MenuLayer *menu_layer, MenuIndex *cell_index, void *data) {
+  // Set current focus index
+  current_focus = cell_index->row;
   // Create detail window
   window_detail = window_create();
   // Set layer handling
@@ -140,7 +143,7 @@ static void detail_window_load(Window *window) {
 
   stock_name = text_layer_create(GRect(5, 0, bounds.size.w - 5, bounds.size.h));
   text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text(stock_name, "Example TextLayer!");
+  text_layer_set_text(stock_name, stocks[current_focus].handle);
   text_layer_set_text_alignment(stock_name, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
 }
