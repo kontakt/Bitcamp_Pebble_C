@@ -147,11 +147,37 @@ static void detail_window_load(Window *window) {
   text_layer_set_text(stock_name, stocks[current_focus].handle);
   text_layer_set_text_alignment(stock_name, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
+
+  // Chart configuration
+
+  // Lines configuration
+  // Line 1
+  line_1 = text_layer_create(GRect(2, 84, bounds.size.w-4, 28));
+  text_layer_set_font(line_1, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_text(line_1, stocks[current_focus].handle);
+  text_layer_set_text_alignment(line_1, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(line_1));
+  // Line 2
+  line_2 = text_layer_create(GRect(2, 84, bounds.size.w-4, 28));
+  text_layer_set_font(line_2, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_text(line_2, stocks[current_focus].handle);
+  text_layer_set_text_alignment(line_2, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(line_2));
+  // Line 3
+  line_3 = text_layer_create(GRect(2, 84, bounds.size.w-4, 28));
+  text_layer_set_font(line_3, fonts_get_system_font(FONT_KEY_GOTHIC_18));
+  text_layer_set_text(line_3, stocks[current_focus].handle);
+  text_layer_set_text_alignment(line_3, GTextAlignmentCenter);
+  layer_add_child(window_layer, text_layer_get_layer(line_3));
 }
 
 // Layer destructor for detail window
 static void detail_window_unload(Window *window) {
   text_layer_destroy(stock_name);
+
+  text_layer_destroy(line_1);
+  text_layer_destroy(line_2);
+  text_layer_destroy(line_3);
 }
 
 static void handle_init(void) {
