@@ -35,16 +35,22 @@ struct stock new_stock(char* handle, char* price, int state){
   temp.state = state;
   switch(state){
     case 0:
-      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_DOWN);
+      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_VDOWN);
       break;
     case 1:
-      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_NEUTRAL);
+      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_DOWN);
       break;
     case 2:
-      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_UP);
+      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_NEUTRAL);
       break;
     case 3:
-      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_HOT);
+      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_UP);
+      break;
+    case 4:
+      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_VUP);
+      break;
+    case 5:
+      temp.graph = gbitmap_create_with_resource(RESOURCE_ID_FIRE);
       break;
   }
   return temp;
@@ -158,13 +164,13 @@ static void detail_window_load(Window *window) {
   text_layer_set_text_alignment(line_1, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(line_1));
   // Line 2
-  line_2 = text_layer_create(GRect(2, 84, bounds.size.w-4, 28));
+  line_2 = text_layer_create(GRect(2, 112, bounds.size.w-4, 28));
   text_layer_set_font(line_2, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text(line_2, stocks[current_focus].handle);
   text_layer_set_text_alignment(line_2, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(line_2));
   // Line 3
-  line_3 = text_layer_create(GRect(2, 84, bounds.size.w-4, 28));
+  line_3 = text_layer_create(GRect(2, 140, bounds.size.w-4, 28));
   text_layer_set_font(line_3, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text(line_3, stocks[current_focus].handle);
   text_layer_set_text_alignment(line_3, GTextAlignmentCenter);
