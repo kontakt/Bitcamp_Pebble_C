@@ -1,27 +1,35 @@
 #include <pebble.h>
-  
+
 struct stock {
   char handle[5];      // Stock trading tag
   char price[10];      // Last price
   int state;           // Down / Neutral / Up / Hot
-  GBitmap  *graph;     
+  GBitmap  *graph;
 };
 
 int stock_count = 0;
 struct stock stocks [10];
 
+//// MAIN SCREEN /////
 static Window *window_main;      // Main window handle
-static Window *window_detail;    // Detail window handle
-
 static MenuLayer *main_menu;     // Menu for main window
-static TextLayer *detail_text;   // Detail text layer
+
+//// FOCUS WINDOW ////
+static Window *window_detail;    // Detail window handle
+static TextLayer *stock_name;    // Stock name text layer
+static BitmapLayer *chart        // Chart for the stock
+static TextLayer *q1;            // Top Left text layer
+static TextLayer *q2;            // Top Right text layer
+static TextLayer *q3;            // Bottom Left text layer
+static TextLayer *q4;            // Bottom Right text layer
+
 
 //// Prototypes ////
 static void detail_window_unload(Window *window);
 static void detail_window_load(Window *window);
 
 // Generate stocks
-struct stock generate(char* handle, char* price, int state){
+struct stock new_stock(char* handle, char* price, int state){
   struct stock temp;
   strcpy( temp.handle, handle );
   strcpy( temp.price, price );
@@ -43,12 +51,12 @@ struct stock generate(char* handle, char* price, int state){
   return temp;
 }
 
-void new_stock(){
-  stocks[stock_count] = generate("GOOG", "$435.01", 0);
+void generate(){
+  stocks[stock_count] = new_stock("GOOG", "$435.01", 0);
   stock_count++;
-  stocks[stock_count] = generate("DONT", "$20.33", 2);
+  stocks[stock_count] = new_stock("DONT", "$20.33", 2);
   stock_count++;
-  stocks[stock_count] = generate("STOP", "$12.35", 1);
+  stocks[stock_count] = new_stock("STOP", "$12.35", 1);
   stock_count++;
 }
 
@@ -125,17 +133,17 @@ static void main_window_unload(Window *window) {
 static void detail_window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_frame(window_layer);
-  
-  detail_text = text_layer_create(GRect(5, 0, bounds.size.w - 5, bounds.size.h));
-  text_layer_set_font(detail_text, fonts_get_system_font(FONT_KEY_GOTHIC_24));
-  text_layer_set_text(detail_text, "Example TextLayer!");
-  text_layer_set_overflow_mode(detail_text, GTextOverflowModeWordWrap);
-  layer_add_child(window_layer, text_layer_get_layer(detail_text));
+
+  stock_name = text_layer_create(GRect(5, 0, bounds.size.w - 5, bounds.size.h));
+  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  text_layer_set_text(stock_name, "Example TextLayer!");
+  text_layer_set_overflow_mode(stock_name, GTextOverflowModeWordWrap);
+  layer_add_child(window_layer, text_layer_get_layer(stock_name));
 }
 
 // Layer destructor for detail window
 static void detail_window_unload(Window *window) {
-  text_layer_destroy(detail_text);
+  text_layer_destroy(stock_name);
 }
 
 static void handle_init(void) {
@@ -156,7 +164,7 @@ static void handle_deinit(void) {
 }
 
 int main(void) {
-  new_stock();
+  generate();
   handle_init();
   app_event_loop();
   handle_deinit();
