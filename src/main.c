@@ -155,7 +155,9 @@ static void detail_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
 
   // Chart configuration
-
+  chart = bitmap_layer_create(GRect(0, 20, bounds.size.w, 64));
+  bitmap_layer_set_bitmap(chart, gbitmap_create_with_resource(RESOURCE_ID_GRAPH));
+  
   // Lines configuration
   // Line 1
   line_1 = text_layer_create(GRect(2, 84, bounds.size.w-4, 28));
@@ -180,10 +182,15 @@ static void detail_window_load(Window *window) {
 // Layer destructor for detail window
 static void detail_window_unload(Window *window) {
   text_layer_destroy(stock_name);
-
+  bitmap_layer_destroy(chart);
   text_layer_destroy(line_1);
   text_layer_destroy(line_2);
   text_layer_destroy(line_3);
+}
+
+// Handle the taps from the accelerometer
+static void tap_handler(AccelAxisType axis, int32_t direction) {
+
 }
 
 static void handle_init(void) {
@@ -196,9 +203,13 @@ static void handle_init(void) {
   });
   // Display created window
   window_stack_push(window_main, true);
+  // Engage tap handler
+  accel_tap_service_subscribe(tap_handler);
 }
 
 static void handle_deinit(void) {
+  // Disengage tap handler
+  accel_tap_service_unsubscribe();
   // Destroy main window
   window_destroy(window_main);
 }

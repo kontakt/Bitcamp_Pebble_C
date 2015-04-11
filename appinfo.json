@@ -43,6 +43,12 @@
                 "menuIcon": true,
                 "name": "ICON",
                 "type": "png"
+            },
+            {
+                "file": "images/GRAPH.png",
+                "menuIcon": true,
+                "name": "GRAPH",
+                "type": "png"
             }
         ]
     },
