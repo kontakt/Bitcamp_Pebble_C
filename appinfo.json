@@ -9,7 +9,7 @@
     "resources": {
         "media": [
             {
-                "file": "images/fire.png",
+                "file": "images/FIRE.png",
                 "name": "HOT",
                 "type": "png"
             },
@@ -29,9 +29,9 @@
                 "type": "png"
             },
             {
-                "file": "images/stocks.png",
+                "file": "images/ICON.png",
                 "menuIcon": true,
-                "name": "icon",
+                "name": "ICON",
                 "type": "png"
             }
         ]
