@@ -3,7 +3,7 @@
 struct stock {
   char handle[5];      // Stock trading tag
   char price[10];      // Last price
-  int state;           // Down / Neutral / Up / Hot
+  int state;           // VDown / Down / Neutral / Up / VUp / Hot
   GBitmap  *graph;
 };
 
@@ -19,11 +19,9 @@ static MenuLayer *main_menu;     // Menu for main window
 static Window *window_detail;    // Detail window handle
 static TextLayer *stock_name;    // Stock name text layer
 static BitmapLayer *chart;       // Chart for the stock
-static TextLayer *q1;            // Top Left text layer
-static TextLayer *q2;            // Top Right text layer
-static TextLayer *q3;            // Bottom Left text layer
-static TextLayer *q4;            // Bottom Right text layer
-
+static TextLayer *l1;            // Top Row
+static TextLayer *l2;            // Middle Row
+static TextLayer *l3;            // Bottom Row
 
 //// Prototypes ////
 static void detail_window_unload(Window *window);
@@ -141,8 +139,11 @@ static void detail_window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_frame(window_layer);
 
-  stock_name = text_layer_create(GRect(5, 0, bounds.size.w - 5, bounds.size.h));
-  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_24));
+  // Stock name configuration
+  stock_name = text_layer_create(GRect(0, 0, bounds.size.w, 20));
+  text_layer_set_background_color(stock_name, GColorBlack);
+  text_layer_set_text_color(stock_name, GColorWhite);
+  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_28_BOLD));
   text_layer_set_text(stock_name, stocks[current_focus].handle);
   text_layer_set_text_alignment(stock_name, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
