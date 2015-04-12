@@ -243,10 +243,10 @@ static void tap_handler(AccelAxisType axis, int32_t direction) {
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
   // Get the first pair
   Tuple *t = dict_read_first(iterator);
-
+  /*
   // Temp value for recieved stock
   struct stock temp;
-/*
+
   // Process all pairs present
   while(t != NULL) {
     // Determine the pair we have
@@ -271,14 +271,14 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         break;
       case stock_line_3:
         strcpy( temp.line_3, t->value );
-        break; */
+        break;
     }
 
     // Get next pair, if any
     t = dict_read_next(iterator);
   }
 }
-
+*/
 static void inbox_dropped_callback(AppMessageResult reason, void *context) {
   APP_LOG(APP_LOG_LEVEL_ERROR, "Message dropped!");
 }
