@@ -226,8 +226,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   while(t != NULL) {
     // Process this pair's key
     switch (t->key) {
-      case KEY_DATA:
-        APP_LOG(APP_LOG_LEVEL_INFO, "KEY_DATA received with value %d", (int)t->value->int32);
+      case stock_handle:
+        APP_LOG(APP_LOG_LEVEL_INFO, "stock_handle received with value %d", (int)t->value->int32);
         break;
     }
 
