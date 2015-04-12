@@ -199,7 +199,7 @@ static void detail_window_unload(Window *window) {
 
 // Handle the taps from the accelerometer
 static void tap_handler(AccelAxisType axis, int32_t direction) {
-
+  vibes_short_pulse();
 }
 
 static void handle_init(void) {
