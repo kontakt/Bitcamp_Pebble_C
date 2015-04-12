@@ -255,22 +255,22 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         APP_LOG(APP_LOG_LEVEL_INFO, "stock_new received with value %d", (int)t->value->int32);
         break;
       case stock_handle:
-        strcpy( temp.handle, t->value->char );
+        strcpy( temp.handle, t->value);
         break;
       case stock_price:
-        strcpy( temp.price, t->value->char );
+        strcpy( temp.price, t->value);
         break;
       case stock_state:
         temp.state = (int)t->value->int32;
         break;
       case stock_line_1:
-        strcpy( temp.line_1, t->value->char );
+        strcpy( temp.line_1, t->value );
         break;
       case stock_line_2:
-        strcpy( temp.line_2, t->value->char );
+        strcpy( temp.line_2, t->value );
         break;
       case stock_line_3:
-        strcpy( temp.line_3, t->value->char );
+        strcpy( temp.line_3, t->value );
         break;
     }
 
