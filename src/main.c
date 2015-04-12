@@ -141,6 +141,7 @@ static void main_window_unload(Window *window) {
 }
 
 static void chart_proc(struct Layer *layer, GContext *ctx){
+  printf("Called");
   GBitmap* overlay = gbitmap_create_with_resource(RESOURCE_ID_GRAPH);
   GBitmap* buffer = graphics_capture_frame_buffer(ctx);
   uint16_t stride = buffer->row_size_bytes;
