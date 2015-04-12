@@ -77,7 +77,7 @@ struct stock new_stock(char* handle, char* price, int state, char* line_1, char*
 // Returns the index of a stock when given handle. Returns -1 if not found
 static int get_index_by_handle(char* handle){
   for(int i=0; i<stock_count; i++){
-    if(strncmp(handle, stocks[i].handle, 4) === 0)
+    if(strncmp(handle, stocks[i].handle, 4) == 0)
       return i;
   }
   return -1;
@@ -260,7 +260,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         break;
       case stock_state:
         break;
-      case stock_line_!:
+      case stock_line_1:
         break;
       case stock_line_2:
         break;
