@@ -146,17 +146,18 @@ static void detail_window_load(Window *window) {
   GRect bounds = layer_get_frame(window_layer);
 
   // Stock name configuration
-  stock_name = text_layer_create(GRect(0, 0, 144, 20));
+  stock_name = text_layer_create(GRect(0, 12, 144, 60));
   text_layer_set_background_color(stock_name, GColorBlack);
   text_layer_set_text_color(stock_name, GColorWhite);
-  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
+  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text(stock_name, stocks[current_focus].handle);
   text_layer_set_text_alignment(stock_name, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
 
   // Chart configuration
-  chart = bitmap_layer_create(GRect(0, 20, 144, 64));
+  chart = bitmap_layer_create(GRect(0, 0, 144, 84));
   bitmap_layer_set_bitmap(chart, gbitmap_create_with_resource(RESOURCE_ID_GRAPH));
+  bitmap_layer_set_compositing_mode(chart, GCompOpSet);
   layer_add_child(window_layer,  bitmap_layer_get_layer(chart));
 
   // Lines configuration
