@@ -87,9 +87,9 @@ static int get_index_by_handle(char* handle){
 static void generate(){
   stocks[stock_count] = new_stock("GOOG", "$540.01 -0.14%", 1, "Price:$540.01 -0.14%", "H/L: 487.56/599.65", "V/dV: 1.4M/1.9M");
   stock_count++;
-  stocks[stock_count] = new_stock("AAPL", "$127.10 +0.43%", 3, "Price: $127.10 +0.43%", "H/L: 133.60/73.05", "V/dV: 40M/50M");
+  stocks[stock_count] = new_stock("AAPL", "$127.10 +0.43%", 4, "Price: $127.10 +0.43%", "H/L: 133.60/73.05", "V/dV: 40M/50M");
   stock_count++;
-  stocks[stock_count] = new_stock("FB", "$82.04 -0.16%", 1, "Price: $82.04 -0.16%", "H/L: 86.07/54.66", "V/dV: 12.5M/25.5M");
+  stocks[stock_count] = new_stock("FB", "$82.04 -0.16%", 0, "Price: $82.04 -0.16%", "H/L: 86.07/54.66", "V/dV: 12.5M/25.5M");
   stock_count++;
   stocks[stock_count] = new_stock("MSFT", "$41.72 +0.58%", 3, "Price: $41.72 +0.58%", "H/L: 50.05/38.51", "V/dV: 28M/39M");
   stock_count++;
