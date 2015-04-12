@@ -1,4 +1,11 @@
 #include <pebble.h>
+#define stock_handle 0
+#define stock_price  1
+#define stock_state  2
+#define stock_line_1 3
+#define stock_line_2 4
+#define stock_line_3 5
+#define refresh      6
 
 struct stock {
   char handle[5];      // Stock trading tag
@@ -63,13 +70,13 @@ struct stock new_stock(char* handle, char* price, int state, char* line_1, char*
 }
 
 void generate(){
-  stocks[stock_count] = new_stock("GOOG", "$435.01 -1.23 (0.25%)", 0, "Price: $435.01 -1.23 (0.25%)", "H/L: 436.22/423.10", "V/dV: 10k/50k");
+  stocks[stock_count] = new_stock("GOOG", "$435.01 -1.23 (0.25%)", 0, "Price: $435.01 -1.23", "H/L: 436.22/423.10", "V/dV: 10k/50k");
   stock_count++;
-  stocks[stock_count] = new_stock("DONT", "$20.33 +0.01 (0.06%)", 2, "Price: $20.33 +0.01 (0.06%)", "H/L: 21.42/15.10", "V/dV: 34k/24k");
+  stocks[stock_count] = new_stock("DONT", "$20.33 +0.01 (0.06%)", 2, "Price: $20.33 +0.01", "H/L: 21.42/15.10", "V/dV: 34k/24k");
   stock_count++;
-  stocks[stock_count] = new_stock("STOP", "$12.35 -0.60 (1.54%)", 1, "Price: $12.35 -0.60 (1.54%)", "H/L: 13.78/10.90", "V/dV: 7k/3k");
+  stocks[stock_count] = new_stock("STOP", "$12.35 -0.60 (1.54%)", 1, "Price: $12.35 -0.60", "H/L: 13.78/10.90", "V/dV: 7k/3k");
   stock_count++;
-  stocks[stock_count] = new_stock("JUNK", "$0.12 +0.11 (200%)", 3, "Price: $0.12 +0.11 (200%)", "H/L: 0.15/0.01", "V/dV: 1k/3k");
+  stocks[stock_count] = new_stock("JUNK", "$0.12 +0.11 (200%)", 3, "Price: $0.12 +0.11", "H/L: 0.15/0.01", "V/dV: 1k/3k");
   stock_count++;
 }
 
@@ -210,6 +217,37 @@ static void tap_handler(AccelAxisType axis, int32_t direction) {
   vibes_short_pulse();
 }
 
+// Communications
+static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
+  // Get the first pair
+  Tuple *t = dict_read_first(iterator);
+
+  // Process all pairs present
+  while(t != NULL) {
+    // Process this pair's key
+    switch (t->key) {
+      case KEY_DATA:
+        APP_LOG(APP_LOG_LEVEL_INFO, "KEY_DATA received with value %d", (int)t->value->int32);
+        break;
+    }
+
+    // Get next pair, if any
+    t = dict_read_next(iterator);
+  }
+}
+
+static void inbox_dropped_callback(AppMessageResult reason, void *context) {
+  APP_LOG(APP_LOG_LEVEL_ERROR, "Message dropped!");
+}
+
+static void outbox_failed_callback(DictionaryIterator *iterator, AppMessageResult reason, void *context) {
+  APP_LOG(APP_LOG_LEVEL_ERROR, "Outbox send failed!");
+}
+
+static void outbox_sent_callback(DictionaryIterator *iterator, void *context) {
+  APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
+}
+
 static void handle_init(void) {
   // Create main window
   window_main = window_create();
@@ -222,6 +260,14 @@ static void handle_init(void) {
   window_stack_push(window_main, true);
   // Engage tap handler
   accel_tap_service_subscribe(tap_handler);
+  // Register communication callbacks
+  app_message_register_inbox_received(inbox_received_callback);
+  app_message_register_inbox_dropped(inbox_dropped_callback);
+  app_message_register_outbox_failed(outbox_failed_callback);
+  app_message_register_outbox_sent(outbox_sent_callback);
+  // Open messenger
+  app_message_open(app_message_inbox_size_maximum(), app_message_outbox_size_maximum());
+
 }
 
 static void handle_deinit(void) {

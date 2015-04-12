@@ -6,6 +6,15 @@
     "companyName": "chuffine@gmail.com",
     "longName": "C Demo",
     "projectType": "native",
+    "appKeys": {
+      "stock_handle" : 0,
+      "stock_price" : 1,
+      "stock_state" : 2,
+      "stock_line_1" : 3,
+      "stock_line_2" : 4,
+      "stock_line_3" : 5,
+      "refresh" : 6
+    }
     "resources": {
         "media": [
             {
