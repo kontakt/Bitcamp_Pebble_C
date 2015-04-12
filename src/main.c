@@ -141,7 +141,17 @@ static void main_window_unload(Window *window) {
 }
 
 static void chart_proc(struct Layer *layer, GContext *ctx){
-
+  GBitmap* overlay = gbitmap_create_with_resource(RESOURCE_ID_CHART);
+  GBitmap* buffer = graphics_capture_frame_buffer(ctx);
+  uint16_t stride = gbitmap_get_row_bytes(buffer);
+  for(int y=0; y<84; y+=8){
+    for(int x=0; x<144; x+=8){
+      char val1 = buffer->addr[(y * stride) / 8 + x / 8];
+      char val2 = overlay->addr[(y * stride) / 8 + x / 8];
+      *buffer->addr[(y * stride) / 8 + x / 8] = val1 ^ val2;
+    }
+  }
+  graphics_release_frame_buffer(ctx, buffer);
 }
 
 // Layer constructor for detail window
