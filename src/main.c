@@ -85,13 +85,13 @@ static int get_index_by_handle(char* handle){
 
 // Generates dummy stocks
 static void generate(){
-  stocks[stock_count] = new_stock("GOOG", "$435.01 -1.23", 0, "Price: $435.01 -1.23", "H/L: 436.22/423.10", "V/dV: 10k/50k");
+  stocks[stock_count] = new_stock("GOOG", "$540.01 -0.14%", 1, "Price:$540.01 -0.14%", "H/L: 487.56/599.65", "V/dV: 1.4M/1.9M");
   stock_count++;
-  stocks[stock_count] = new_stock("DONT", "$20.33 +0.01", 2, "Price: $20.33 +0.01", "H/L: 21.42/15.10", "V/dV: 34k/24k");
+  stocks[stock_count] = new_stock("AAPL", "$127.10 +0.43%", 3, "Price: $127.10 +0.43%", "H/L: 133.60/73.05", "V/dV: 40M/50M");
   stock_count++;
-  stocks[stock_count] = new_stock("STOP", "$12.35 -0.60", 1, "Price: $12.35 -0.60", "H/L: 13.78/10.90", "V/dV: 7k/3k");
+  stocks[stock_count] = new_stock("FB", "$82.04 -0.16%", 1, "Price: $82.04 -0.16%", "H/L: 86.07/54.66", "V/dV: 12.5M/25.5M");
   stock_count++;
-  stocks[stock_count] = new_stock("JUNK", "$0.12 +0.11", 3, "Price: $0.12 +0.11", "H/L: 0.15/0.01", "V/dV: 1k/3k");
+  stocks[stock_count] = new_stock("MSFT", "$41.72 +0.58%", 3, "Price: $41.72 +0.58%", "H/L: 50.05/38.51", "V/dV: 28M/39M");
   stock_count++;
 }
 
@@ -285,6 +285,17 @@ static void outbox_sent_callback(DictionaryIterator *iterator, void *context) {
   APP_LOG(APP_LOG_LEVEL_INFO, "Outbox send success!");
 }
 
+static void sync_changed_handler(const uint32_t key, const Tuple *new_tuple, const Tuple *old_tuple, void *context) {
+  // Update UI here
+
+}
+
+static void sync_error_handler(DictionaryResult dict_error, AppMessageResult app_message_error, void *context) {
+  // An error occured!
+
+}
+
+// Initialization
 static void handle_init(void) {
   // Create main window
   window_main = window_create();
@@ -307,6 +318,7 @@ static void handle_init(void) {
 
 }
 
+// Deinitilization
 static void handle_deinit(void) {
   // Disengage tap handler
   accel_tap_service_unsubscribe();
@@ -314,6 +326,7 @@ static void handle_deinit(void) {
   window_destroy(window_main);
 }
 
+// Entry point
 int main(void) {
   generate();
   handle_init();
