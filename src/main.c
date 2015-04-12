@@ -146,7 +146,7 @@ static void detail_window_load(Window *window) {
   GRect bounds = layer_get_frame(window_layer);
 
   // Stock name configuration
-  stock_name = text_layer_create(GRect(0, 0, bounds.size.w, 20));
+  stock_name = text_layer_create(GRect(0, 0, 144, 20));
   text_layer_set_background_color(stock_name, GColorBlack);
   text_layer_set_text_color(stock_name, GColorWhite);
   text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
@@ -155,27 +155,25 @@ static void detail_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
 
   // Chart configuration
-  chart = bitmap_layer_create(GRect(0, 20, bounds.size.w, 64));
+  chart = bitmap_layer_create(GRect(0, 20, 144, 64));
   bitmap_layer_set_bitmap(chart, gbitmap_create_with_resource(RESOURCE_ID_GRAPH));
-  
+  layer_add_child(window_layer,  bitmap_layer_get_layer(chart));
+
   // Lines configuration
   // Line 1
-  line_1 = text_layer_create(GRect(2, 84, bounds.size.w-4, 28));
+  line_1 = text_layer_create(GRect(2, 84, 140, 28));
   text_layer_set_font(line_1, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text(line_1, stocks[current_focus].handle);
-  text_layer_set_text_alignment(line_1, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(line_1));
   // Line 2
-  line_2 = text_layer_create(GRect(2, 112, bounds.size.w-4, 28));
+  line_2 = text_layer_create(GRect(2, 112, 140, 28));
   text_layer_set_font(line_2, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text(line_2, stocks[current_focus].handle);
-  text_layer_set_text_alignment(line_2, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(line_2));
   // Line 3
-  line_3 = text_layer_create(GRect(2, 140, bounds.size.w-4, 28));
+  line_3 = text_layer_create(GRect(2, 140, 140, 28));
   text_layer_set_font(line_3, fonts_get_system_font(FONT_KEY_GOTHIC_18));
   text_layer_set_text(line_3, stocks[current_focus].handle);
-  text_layer_set_text_alignment(line_3, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(line_3));
 }
 
