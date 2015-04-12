@@ -145,7 +145,7 @@ static void chart_proc(struct Layer *layer, GContext *ctx){
   GBitmap* overlay = gbitmap_create_with_resource(RESOURCE_ID_GRAPH);
   GBitmap* buffer = graphics_capture_frame_buffer(ctx);
   uint16_t stride = buffer->row_size_bytes;
-  for(int y=0; y<84; y+=8){
+  for(int y=0; y<84; y++){
     for(int x=0; x<144; x+=8){
       char val1 = ((uint8_t*)buffer->addr)[(y * stride) + x / 8];
       char val2 = ((uint8_t*)overlay->addr)[(y * stride) + x / 8];
