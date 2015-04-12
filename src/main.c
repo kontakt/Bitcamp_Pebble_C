@@ -147,7 +147,6 @@ static void chart_proc(struct Layer *layer, GContext *ctx){
 // Layer constructor for detail window
 static void detail_window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
-  GRect bounds = layer_get_frame(window_layer);
 
   // Stock name configuration
   stock_name = text_layer_create(GRect(0, 12, 144, 60));
@@ -181,7 +180,7 @@ static void detail_window_load(Window *window) {
 // Layer destructor for detail window
 static void detail_window_unload(Window *window) {
   text_layer_destroy(stock_name);
-  bitmap_layer_destroy(chart);
+  layer_destroy(chart);
   text_layer_destroy(line_1);
   text_layer_destroy(line_2);
   text_layer_destroy(line_3);
