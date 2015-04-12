@@ -46,7 +46,6 @@
             },
             {
                 "file": "images/GRAPH.png",
-                "menuIcon": true,
                 "name": "GRAPH",
                 "type": "png"
             }
