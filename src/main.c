@@ -76,7 +76,7 @@ struct stock new_stock(char* handle, char* price, int state, char* line_1, char*
 
 // Returns the index of a stock when given handle. Returns -1 if not found
 static int get_index_by_handle(char* handle){
-  for(inti=0; i<stock_count; i++){
+  for(int i=0; i<stock_count; i++){
     if(strncmp(handle, stocks[i].handle, 4) === 0)
       return i;
   }
