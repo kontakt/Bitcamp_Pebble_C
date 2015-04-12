@@ -1,4 +1,6 @@
 #include <pebble.h>
+
+// Parameters to be passed or evaluated
 #define stock_new    0
 #define stock_handle 1
 #define stock_price  2
@@ -13,10 +15,11 @@ struct stock {
   char handle[5];      // Stock trading tag
   char price[20];      // Last price
   int state;           // VDown / Down / Neutral / Up / VUp / Hot
-  char line_1[30];
-  char line_2[20];
-  char line_3[20];
-  GBitmap  *graph;
+  char line_1[30];     // First line on details page
+  char line_2[20];     // Second line
+  char line_3[20];     // Third line
+  GBitmap  *graph;     // The icon for the main menu
+  GBitmap  *chart;     // Chart for details page
 };
 
 int current_focus = 0;
@@ -71,7 +74,17 @@ struct stock new_stock(char* handle, char* price, int state, char* line_1, char*
   return temp;
 }
 
-void generate(){
+// Returns the index of a stock when given handle. Returns -1 if not found
+static int get_index_by_handle(char* handle){
+  for(inti=0; i<stock_count; i++){
+    if(strncmp(handle, stocks[i].handle, 4) === 0)
+      return i;
+  }
+  return -1;
+}
+
+// Generates dummy stocks
+static void generate(){
   stocks[stock_count] = new_stock("GOOG", "$435.01 -1.23", 0, "Price: $435.01 -1.23", "H/L: 436.22/423.10", "V/dV: 10k/50k");
   stock_count++;
   stocks[stock_count] = new_stock("DONT", "$20.33 +0.01", 2, "Price: $20.33 +0.01", "H/L: 21.42/15.10", "V/dV: 34k/24k");
@@ -231,12 +244,27 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   // Get the first pair
   Tuple *t = dict_read_first(iterator);
 
+  // Temp value for recieved stock
+  struct stock temp;
+
   // Process all pairs present
   while(t != NULL) {
-    // Process this pair's key
+    // Determine the pair we have
     switch (t->key) {
       case stock_new:
         APP_LOG(APP_LOG_LEVEL_INFO, "stock_new received with value %d", (int)t->value->int32);
+        break;
+      case stock_handle:
+        break;
+      case stock_price:
+        break;
+      case stock_state:
+        break;
+      case stock_line_!:
+        break;
+      case stock_line_2:
+        break;
+      case stock_line_3:
         break;
     }
 
