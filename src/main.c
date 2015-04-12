@@ -2,8 +2,11 @@
 
 struct stock {
   char handle[5];      // Stock trading tag
-  char price[10];      // Last price
+  char price[20];      // Last price
   int state;           // VDown / Down / Neutral / Up / VUp / Hot
+  char line_1[30];
+  char line_2[20];
+  char line_3[20];
   GBitmap  *graph;
 };
 
@@ -28,10 +31,13 @@ static void detail_window_unload(Window *window);
 static void detail_window_load(Window *window);
 
 // Generate stocks
-struct stock new_stock(char* handle, char* price, int state){
+struct stock new_stock(char* handle, char* price, int state, char* line_1, char* line_2, char* line_3){
   struct stock temp;
   strcpy( temp.handle, handle );
   strcpy( temp.price, price );
+  strcpy( temp.line_1, line_1 );
+  strcpy( temp.line_2, line_2 );
+  strcpy( temp.line_3, line_3 );
   temp.state = state;
   switch(state){
     case 0:
@@ -57,13 +63,13 @@ struct stock new_stock(char* handle, char* price, int state){
 }
 
 void generate(){
-  stocks[stock_count] = new_stock("GOOG", "$435.01", 0);
+  stocks[stock_count] = new_stock("GOOG", "$435.01 -1.23 (0.25%)", 0, "Price: $435.01 -1.23 (0.25%)", "H/L: 436.22/423.10", "V/dV: 10k/50k");
   stock_count++;
-  stocks[stock_count] = new_stock("DONT", "$20.33", 2);
+  stocks[stock_count] = new_stock("DONT", "$20.33 +0.01 (0.06%)", 2, "Price: $20.33 +0.01 (0.06%)", "H/L: 21.42/15.10", "V/dV: 34k/24k");
   stock_count++;
-  stocks[stock_count] = new_stock("STOP", "$12.35", 1);
+  stocks[stock_count] = new_stock("STOP", "$12.35 -0.60 (1.54%)", 1, "Price: $12.35 -0.60 (1.54%)", "H/L: 13.78/10.90", "V/dV: 7k/3k");
   stock_count++;
-  stocks[stock_count] = new_stock("JUNK", "$0.12", 3);
+  stocks[stock_count] = new_stock("JUNK", "$0.12 +0.11 (200%)", 3, "Price: $0.12 +0.11 (200%)", "H/L: 0.15/0.01", "V/dV: 1k/3k");
   stock_count++;
 }
 
@@ -140,6 +146,7 @@ static void main_window_unload(Window *window) {
   menu_layer_destroy(main_menu);
 }
 
+// Overlay the chart over the handle
 static void chart_proc(struct Layer *layer, GContext *ctx){
   GBitmap* overlay = gbitmap_create_with_resource(RESOURCE_ID_GRAPH);
   GBitmap* buffer = graphics_capture_frame_buffer(ctx);
@@ -167,6 +174,7 @@ static void detail_window_load(Window *window) {
 
   // Create generic layer
   chart = layer_create(GRect(0, 0, 144, 84));
+  // Add in bitmap
   layer_set_update_proc(chart, chart_proc);
   layer_add_child(window_layer, chart);
 
