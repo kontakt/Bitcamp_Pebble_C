@@ -246,7 +246,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   // Temp value for recieved stock
   struct stock temp;
-
+/*
   // Process all pairs present
   while(t != NULL) {
     // Determine the pair we have
@@ -271,7 +271,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         break;
       case stock_line_3:
         strcpy( temp.line_3, t->value );
-        break;
+        break; */
     }
 
     // Get next pair, if any
