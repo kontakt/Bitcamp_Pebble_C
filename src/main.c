@@ -148,7 +148,7 @@ static void chart_proc(struct Layer *layer, GContext *ctx){
     for(int x=0; x<144; x+=8){
       char val1 = ((uint8_t*)buffer->addr)[(y * stride) / 8 + x / 8];
       char val2 = ((uint8_t*)overlay->addr)[(y * stride) / 8 + x / 8];
-      *((uint8_t*)buffer->addr)[(y * stride) / 8 + x / 8] = val1 ^ val2;
+      *(((uint8_t*)buffer->addr)[(y * stride) / 8 + x / 8]) = val1 ^ val2;
     }
   }
   graphics_release_frame_buffer(ctx, buffer);
