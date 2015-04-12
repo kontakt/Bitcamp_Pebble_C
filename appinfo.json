@@ -7,13 +7,14 @@
     "longName": "C Demo",
     "projectType": "native",
     "appKeys": {
-      "stock_handle" : 0,
-      "stock_price" : 1,
-      "stock_state" : 2,
-      "stock_line_1" : 3,
-      "stock_line_2" : 4,
-      "stock_line_3" : 5,
-      "refresh" : 6
+      "stock_new" : 0,
+      "stock_handle" : 1,
+      "stock_price" : 2,
+      "stock_state" : 3,
+      "stock_line_1" : 4,
+      "stock_line_2" : 5,
+      "stock_line_3" : 6,
+      "refresh" : 7
     },
     "resources": {
         "media": [

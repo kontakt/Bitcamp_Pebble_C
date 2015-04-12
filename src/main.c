@@ -1,11 +1,13 @@
 #include <pebble.h>
-#define stock_handle 0
-#define stock_price  1
-#define stock_state  2
-#define stock_line_1 3
-#define stock_line_2 4
-#define stock_line_3 5
-#define refresh      6
+#define stock_new    0
+#define stock_handle 1
+#define stock_price  2
+#define stock_state  3
+#define stock_line_1 4
+#define stock_line_2 5
+#define stock_line_3 6
+#define refresh      7
+
 
 struct stock {
   char handle[5];      // Stock trading tag
@@ -70,13 +72,13 @@ struct stock new_stock(char* handle, char* price, int state, char* line_1, char*
 }
 
 void generate(){
-  stocks[stock_count] = new_stock("GOOG", "$435.01 -1.23 (0.25%)", 0, "Price: $435.01 -1.23", "H/L: 436.22/423.10", "V/dV: 10k/50k");
+  stocks[stock_count] = new_stock("GOOG", "$435.01 -1.23", 0, "Price: $435.01 -1.23", "H/L: 436.22/423.10", "V/dV: 10k/50k");
   stock_count++;
-  stocks[stock_count] = new_stock("DONT", "$20.33 +0.01 (0.06%)", 2, "Price: $20.33 +0.01", "H/L: 21.42/15.10", "V/dV: 34k/24k");
+  stocks[stock_count] = new_stock("DONT", "$20.33 +0.01", 2, "Price: $20.33 +0.01", "H/L: 21.42/15.10", "V/dV: 34k/24k");
   stock_count++;
-  stocks[stock_count] = new_stock("STOP", "$12.35 -0.60 (1.54%)", 1, "Price: $12.35 -0.60", "H/L: 13.78/10.90", "V/dV: 7k/3k");
+  stocks[stock_count] = new_stock("STOP", "$12.35 -0.60", 1, "Price: $12.35 -0.60", "H/L: 13.78/10.90", "V/dV: 7k/3k");
   stock_count++;
-  stocks[stock_count] = new_stock("JUNK", "$0.12 +0.11 (200%)", 3, "Price: $0.12 +0.11", "H/L: 0.15/0.01", "V/dV: 1k/3k");
+  stocks[stock_count] = new_stock("JUNK", "$0.12 +0.11", 3, "Price: $0.12 +0.11", "H/L: 0.15/0.01", "V/dV: 1k/3k");
   stock_count++;
 }
 
@@ -226,8 +228,8 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
   while(t != NULL) {
     // Process this pair's key
     switch (t->key) {
-      case stock_handle:
-        APP_LOG(APP_LOG_LEVEL_INFO, "stock_handle received with value %d", (int)t->value->int32);
+      case stock_new:
+        APP_LOG(APP_LOG_LEVEL_INFO, "stock_new received with value %d", (int)t->value->int32);
         break;
     }
 
