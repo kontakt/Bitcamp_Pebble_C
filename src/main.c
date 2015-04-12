@@ -155,6 +155,7 @@ static void detail_window_load(Window *window) {
   // Chart configuration
   chart = bitmap_layer_create(GRect(0, 0, 144, 84));
   bitmap_layer_set_bitmap(chart, gbitmap_create_with_resource(RESOURCE_ID_GRAPH));
+  bitmap_layer_set_background_color(chart, GColorClear);
   bitmap_layer_set_compositing_mode(chart, GCompOpSet);
   layer_add_child(window_layer,  bitmap_layer_get_layer(chart));
 
