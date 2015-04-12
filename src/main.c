@@ -157,7 +157,7 @@ static void detail_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
 
   // Create generic layer
-  chart = layer_create(GRect(0, 0, 144, 84))
+  chart = layer_create(GRect(0, 0, 144, 84));
   layer_set_update_proc(chart, chart_proc);
 
   // Lines configuration
