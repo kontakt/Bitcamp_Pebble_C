@@ -182,17 +182,17 @@ static void detail_window_load(Window *window) {
   // Line 1
   line_1 = text_layer_create(GRect(2, 84, 140, 28));
   text_layer_set_font(line_1, fonts_get_system_font(FONT_KEY_GOTHIC_18));
-  text_layer_set_text(line_1, stocks[current_focus].handle);
+  text_layer_set_text(line_1, stocks[current_focus].line_1);
   layer_add_child(window_layer, text_layer_get_layer(line_1));
   // Line 2
   line_2 = text_layer_create(GRect(2, 112, 140, 28));
   text_layer_set_font(line_2, fonts_get_system_font(FONT_KEY_GOTHIC_18));
-  text_layer_set_text(line_2, stocks[current_focus].handle);
+  text_layer_set_text(line_2, stocks[current_focus].line_2);
   layer_add_child(window_layer, text_layer_get_layer(line_2));
   // Line 3
   line_3 = text_layer_create(GRect(2, 140, 140, 28));
   text_layer_set_font(line_3, fonts_get_system_font(FONT_KEY_GOTHIC_18));
-  text_layer_set_text(line_3, stocks[current_focus].handle);
+  text_layer_set_text(line_3, stocks[current_focus].line_3);
   layer_add_child(window_layer, text_layer_get_layer(line_3));
 }
 
