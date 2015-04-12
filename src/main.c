@@ -18,7 +18,7 @@ static MenuLayer *main_menu;     // Menu for main window
 //// FOCUS WINDOW ////
 static Window *window_detail;    // Detail window handle
 static TextLayer *stock_name;    // Stock name text layer
-static BitmapLayer *chart;       // Chart for the stock
+static Layer *chart;             // Chart for the stock
 static TextLayer *line_1;        // Top Row
 static TextLayer *line_2;        // Middle Row
 static TextLayer *line_3;        // Bottom Row
@@ -140,24 +140,25 @@ static void main_window_unload(Window *window) {
   menu_layer_destroy(main_menu);
 }
 
+static void chart_proc(struct Layer *layer, GContext *ctx){
+
+}
+
 // Layer constructor for detail window
 static void detail_window_load(Window *window) {
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_frame(window_layer);
 
   // Stock name configuration
-  stock_name = text_layer_create(GRect(0, 0, 144, 20));
-  text_layer_set_background_color(stock_name, GColorBlack);
-  text_layer_set_text_color(stock_name, GColorWhite);
-  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_GOTHIC_14_BOLD));
+  stock_name = text_layer_create(GRect(0, 12, 144, 60));
+  text_layer_set_font(stock_name, fonts_get_system_font(FONT_KEY_BITHAM_42_BOLD));
   text_layer_set_text(stock_name, stocks[current_focus].handle);
   text_layer_set_text_alignment(stock_name, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(stock_name));
 
-  // Chart configuration
-  chart = bitmap_layer_create(GRect(0, 20, 144, 64));
-  bitmap_layer_set_bitmap(chart, gbitmap_create_with_resource(RESOURCE_ID_GRAPH));
-  layer_add_child(window_layer,  bitmap_layer_get_layer(chart));
+  // Create generic layer
+  chart = layer_create(GRect(0, 0, 144, 84))
+  layer_set_update_proc(chart, chart_proc);
 
   // Lines configuration
   // Line 1
